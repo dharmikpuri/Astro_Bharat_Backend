@@ -1,6 +1,10 @@
 import express from "express"
-import { AstrologerRegistration } from "../controllers/AstrologerController";
+import { AstrologerRegistration, getAllAstrologers, updateAstrologer } from "../controllers/AstrologerController";
 
-const astroRoute = express.Router();
+export const astroRoute = express.Router();
+// REGISTER ASTROLOGER 
 astroRoute.post("/api/astrologers/register",AstrologerRegistration);
-astroRoute.get("/api/astrologers",AstrologerRegistration)
+// GET ALL ASTROLOGER 
+astroRoute.get("/api/astrologers",getAllAstrologers);
+//UPDATE ASTROLOGER
+astroRoute.put("/api/astrologers/:id",updateAstrologer)
