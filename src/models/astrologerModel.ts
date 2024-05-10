@@ -9,7 +9,7 @@ interface IUser extends Document{
  specialities:[string],
  profileImageUrl:string
 }
-const userSchema = new mongoose.Schema<IUser>({
+const astrologerSchema = new mongoose.Schema<IUser>({
     name:{
         type:String,
         require:true
@@ -38,4 +38,4 @@ const userSchema = new mongoose.Schema<IUser>({
     }
 })
 
-export const userModel:Model<IUser> = mongoose.model<IUser>("users",userSchema);
+export const astrologerModel:Model<IUser> = mongoose.model<IUser>("users",astrologerSchema);
