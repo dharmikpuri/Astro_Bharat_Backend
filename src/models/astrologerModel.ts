@@ -38,4 +38,4 @@ const astrologerSchema = new mongoose.Schema<IUser>({
     }
 })
 
-export const astrologerModel:Model<IUser> = mongoose.model<IUser>("users",astrologerSchema);
+export const astrologerModel:Model<IUser> = mongoose.model<IUser>("astologersDetails",astrologerSchema);
