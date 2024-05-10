@@ -15,7 +15,7 @@ export const AstrologerRegistration = async (req: Request, res: Response) => {
         });
         await userData.save();
         res.status(200).send({message:"Data Added Successfully",data:userData});
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).json({ error: error.message });
     }
 };
@@ -25,7 +25,7 @@ export const getAllAstrologers = async (req: Request, res: Response) => {
     try {
         const astrologerData = await astrologerModel.find();
         res.status(200).send(astrologerData);
-    } catch (error) {
+    } catch (error:any) {
         res.status(500).json({ error: error.message });
     }
 }
@@ -47,7 +47,7 @@ export const updateAstrologer = async (req: Request, res: Response) => {
             return res.status(404).send({ message: "Astrologer Not Found" });
         }
         res.status(200).send({ message: "Astrologer Updated Successfully", data: updatedAstologer });
-    } catch (error) {
-        res.status(500).send({ error: error.message });
+    } catch (error:any) {
+        res.status(500).send({ message: error.message });
     }
 }
