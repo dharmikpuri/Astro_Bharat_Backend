@@ -5,7 +5,11 @@ import { astrologerModel } from "../models/astrologerModel";
 export const AstrologerRegistration = async (req: Request, res: Response) => {
     const { name, gender, email, languages, specialities, image } = req.body;
     try {
-        const userData = new astrologerModel({
+        const existingAstrologer = await astrologerModel.findOne({ email });
+        if (existingAstrologer) {
+            return res.status(200).send({ message: "Email already registered. Please try with another one." });
+        }
+        const astrologerData = new astrologerModel({
             name,
             gender,
             email,
@@ -13,9 +17,9 @@ export const AstrologerRegistration = async (req: Request, res: Response) => {
             specialities,
             profileImageUrl: image
         });
-        await userData.save();
-        res.status(200).send({message:"Data Added Successfully",data:userData});
-    } catch (error:any) {
+        await astrologerData.save();
+        res.status(200).send({ message: "Data Added Successfully", data: astrologerData });
+    } catch (error: any) {
         res.status(500).json({ error: error.message });
     }
 };
@@ -25,7 +29,7 @@ export const getAllAstrologers = async (req: Request, res: Response) => {
     try {
         const astrologerData = await astrologerModel.find();
         res.status(200).send(astrologerData);
-    } catch (error:any) {
+    } catch (error: any) {
         res.status(500).json({ error: error.message });
     }
 }
@@ -42,12 +46,12 @@ export const updateAstrologer = async (req: Request, res: Response) => {
             languages,
             specialities,
             profileImageUrl: image
-        },{ new: true })
+        }, { new: true })
         if (!updatedAstologer) {
             return res.status(404).send({ message: "Astrologer Not Found" });
         }
-        res.status(200).send({ message: "Astrologer Updated Successfully", data: updatedAstologer});
-    } catch (error:any) {
+        res.status(200).send({ message: "Astrologer Updated Successfully", data: updatedAstologer });
+    } catch (error: any) {
         res.status(500).send({ message: error.message });
     }
 }
