@@ -42,11 +42,11 @@ export const updateAstrologer = async (req: Request, res: Response) => {
             languages,
             specialities,
             profileImageUrl: image
-        })
+        },{ new: true })
         if (!updatedAstologer) {
             return res.status(404).send({ message: "Astrologer Not Found" });
         }
-        res.status(200).send({ message: "Astrologer Updated Successfully", data: updatedAstologer });
+        res.status(200).send({ message: "Astrologer Updated Successfully", data: updatedAstologer});
     } catch (error:any) {
         res.status(500).send({ message: error.message });
     }
