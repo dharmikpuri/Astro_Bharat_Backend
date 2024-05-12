@@ -4,6 +4,7 @@ import { astrologerModel } from "../models/astrologerModel";
 // ASTROLOGER REGISTRATION 
 export const AstrologerRegistration = async (req: Request, res: Response) => {
     const { name, gender, email, languages, specialities, image } = req.body;
+    console.log(image,"Image")
     try {
         const existingAstrologer = await astrologerModel.findOne({ email });
         if (existingAstrologer) {
@@ -18,7 +19,7 @@ export const AstrologerRegistration = async (req: Request, res: Response) => {
             profileImageUrl: image
         });
         await astrologerData.save();
-        res.status(200).send({ message: "Data Added Successfully", data: astrologerData });
+        res.status(200).send({ message: "Astrologer Added Successfully", data: astrologerData });
     } catch (error: any) {
         res.status(500).json({ error: error.message });
     }
